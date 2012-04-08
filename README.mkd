@@ -27,6 +27,8 @@ pip install django-email-manager --upgrade --no-deps
 
 # Motivation
 
+* <http://djangopackages.com/grids/g/email>
+
 * Problem: Bad control of what and how many e-mails have being sent to users.
 * Solution: A simple table that log a summary of each e-mail had been sent. 
 A daily routine avoid this table grows uncontrolled and use the data to generate statistics.
