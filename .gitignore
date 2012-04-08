@@ -1,6 +1,7 @@
 dist/
 build/
 .settings
+.amateras
 .project
 .pydevproject
 .settings/org.eclipse.core.resources.prefs

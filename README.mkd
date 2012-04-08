@@ -112,6 +112,11 @@ python manage.py update_email_statistics
 
 # Change Log
 
+## Version 0.2.1
+  * 2012/04/08 (yyyy/mm/dd)
+  * <http://pypi.python.org/pypi/django-email-manager/0.2.1>
+  * Fixing configuration of package
+
 ## Version 0.2.0 
   * 2012/02/11 (yyyy/mm/dd)
   * <http://pypi.python.org/pypi/django-email-manager/0.2.0>

@@ -35,7 +35,7 @@ setup(name='django-email-manager',
           'Topic :: Software Development'
       ],
 
-      version='0.2.0',
+      version='0.2.1',
       install_requires=install_requires,
       tests_require=tests_require,
       test_suite='runtests.runtests',
@@ -43,10 +43,4 @@ setup(name='django-email-manager',
 
       packages=find_packages(),
       include_package_data=True,
-      package_data={
-          'email_manager': [
-              'templates/*',
-              'templates/email_manager/*',
-          ],
-      },
 )

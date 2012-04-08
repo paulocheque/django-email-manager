@@ -1,1 +1,5 @@
-include *.html
+include setup.py README.mkd MANIFEST.in runtests.py settings.py
+recursive-include email_manager/templates *
+global-exclude *~
+global-exclude *.pyc
+global-exclude virtualenv*
