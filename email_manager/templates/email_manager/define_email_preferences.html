@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block contents %}
+
+<h1>Email preferences ({{ user }})</h1>
+
+<table id="email-preferences">
+	<thead>
+		<tr>
+			<td>Email type</td>
+			<td>State</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for email_type in email_types %}
+		<tr>
+			<td>{{ email_type }}</td>
+			<td>
+				{% if email_type.id in prefs %}
+					Disabled <a href="{% url email_manager:enable_email_type user.id email_type.id %}">Click to enable</a>
+				{% else %}
+					Enabled <a href="{% url email_manager:disable_email_type user.id email_type.id %}">Click to disable</a>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

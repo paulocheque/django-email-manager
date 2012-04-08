@@ -1,0 +1,128 @@
+Django Email Manager
+-----------
+
+![Continuous Integration Status](https://secure.travis-ci.org/paulocheque/django-email-manager.png?branch=master)
+
+A simple application to manage emails sent by a Django application.
+
+# Installation
+
+```
+pip install django-email-manager
+```
+
+or
+
+```
+  # Download zip file
+  # Extract it
+  # Execute in the extracted directory: python setup.py install
+```
+
+#### Upgrade
+```
+pip install django-email-manager --upgrade --no-deps
+```
+
+# Motivation
+
+= Problem: Bad control of what and how many e-mails have being sent to users.
+= Solution: A simple table that log a summary of each e-mail had been sent. 
+A daily routine avoid this table grows uncontrolled and use the data to generate statistics.
+
+= Problem: Important e-mails are deleted from the database when a user change his e-mail.
+= Solution: A simple table that store all e-mails independently.
+
+= Usually, good systems do not send attachments by e-mail because this a open door to attacks.
+
+# Configuration
+
+1. settings.py:
+
+
+```python
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'email_manager',
+)
+
+# This attribute activates a listener to store all e-mails independently of auth_user database.
+EMAIL_DATABASE_ACTIVATED = True
+
+# If you want to use celery for sending e-mails, you can customize the task name, example:
+EMAIL_MANAGER_USING_CELERY = True # default = False
+EMAIL_MANAGER_TASK = 'email-manager-task' # default = None
+```
+
+2. urls.py
+
+
+```python
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+     url(r'^admin/', include(admin.site.urls)),
+     (r'^email-manager/', include('email_manager.urls', namespace='email_manager', app_name='email_manager')),
+)
+```
+
+3. Templates:
+
+
+```python
+{% url email_manager:define_email_preferences user.id %}
+{% if user.is_superuser %}
+    {% url email_manager:send_email_to_groups %}
+    {% url email_manager:send_email_to_users %}
+    {% url email_manager:update_statistics %}
+{% endif %}
+```
+
+# Usage
+
+1. Manual Test:
+
+
+```
+* /email-manager/send-email-to-groups/
+* /email-manager/send-email-to-users/
+* /email-manager/update-statistics/
+* /email-manager/define_email_preferences/USER_ID
+```
+
+2. Send e-mails directly in source code:
+
+
+```python
+from email_manager.feature_send_email import EmailSender
+EmailSender().send_email(emails, subject, text_content, html_content, main_content)
+EmailSender().send_email_to_users(users, additional_emails, subject, content, html_content, email_type)
+EmailSender().send_email_to_groups(groups, additional_emails, subject, content, html_content, email_type)
+```
+
+3. Manual updating statistics:
+
+
+```
+python manage.py update_email_statistics
+```
+
+# Change Log
+
+==Version 0.2.0==
+  * 2012/02/11 (yyyy/mm/dd)
+  * http://pypi.python.org/pypi/django-email-manager/0.2.0
+  * Now emails can have types and users can define which types of e-mails they want to receive.
+
+==Version 0.1.0==
+  * 2012/02/05 (yyyy/mm/dd)
+  * http://pypi.python.org/pypi/django-email-manager/0.1.0
+  * Initial version
+
+
+# TODO:
+
+1. Auto update statistics
+2. Simple graphs and reports
