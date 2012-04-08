@@ -20,24 +20,25 @@ or
 ```
 
 #### Upgrade
+
 ```
 pip install django-email-manager --upgrade --no-deps
 ```
 
 # Motivation
 
-= Problem: Bad control of what and how many e-mails have being sent to users.
-= Solution: A simple table that log a summary of each e-mail had been sent. 
+* Problem: Bad control of what and how many e-mails have being sent to users.
+* Solution: A simple table that log a summary of each e-mail had been sent. 
 A daily routine avoid this table grows uncontrolled and use the data to generate statistics.
 
-= Problem: Important e-mails are deleted from the database when a user change his e-mail.
-= Solution: A simple table that store all e-mails independently.
+* Problem: Important e-mails are deleted from the database when a user change his e-mail.
+* Solution: A simple table that store all e-mails independently.
 
-= Usually, good systems do not send attachments by e-mail because this a open door to attacks.
+* Usually, good systems do not send attachments by e-mail because this a open door to attacks.
 
 # Configuration
 
-1. settings.py:
+* settings.py:
 
 
 ```python
@@ -55,7 +56,7 @@ EMAIL_MANAGER_USING_CELERY = True # default = False
 EMAIL_MANAGER_TASK = 'email-manager-task' # default = None
 ```
 
-2. urls.py
+* urls.py
 
 
 ```python
@@ -68,7 +69,7 @@ urlpatterns = patterns('',
 )
 ```
 
-3. Templates:
+* Templates:
 
 
 ```python
@@ -82,17 +83,17 @@ urlpatterns = patterns('',
 
 # Usage
 
-1. Manual Test:
+* Manual Test:
 
 
 ```
-* /email-manager/send-email-to-groups/
-* /email-manager/send-email-to-users/
-* /email-manager/update-statistics/
-* /email-manager/define_email_preferences/USER_ID
+/email-manager/send-email-to-groups/
+/email-manager/send-email-to-users/
+/email-manager/update-statistics/
+/email-manager/define_email_preferences/USER_ID
 ```
 
-2. Send e-mails directly in source code:
+* Send e-mails directly in source code:
 
 
 ```python
@@ -102,7 +103,7 @@ EmailSender().send_email_to_users(users, additional_emails, subject, content, ht
 EmailSender().send_email_to_groups(groups, additional_emails, subject, content, html_content, email_type)
 ```
 
-3. Manual updating statistics:
+* Manual updating statistics:
 
 
 ```
@@ -111,18 +112,18 @@ python manage.py update_email_statistics
 
 # Change Log
 
-==Version 0.2.0==
+## Version 0.2.0 
   * 2012/02/11 (yyyy/mm/dd)
-  * http://pypi.python.org/pypi/django-email-manager/0.2.0
+  * <http://pypi.python.org/pypi/django-email-manager/0.2.0>
   * Now emails can have types and users can define which types of e-mails they want to receive.
 
-==Version 0.1.0==
+## Version 0.1.0
   * 2012/02/05 (yyyy/mm/dd)
-  * http://pypi.python.org/pypi/django-email-manager/0.1.0
+  * <http://pypi.python.org/pypi/django-email-manager/0.1.0>
   * Initial version
 
 
 # TODO:
 
-1. Auto update statistics
-2. Simple graphs and reports
+* Auto update statistics
+* Simple graphs and reports
